@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:netease_cloud_music_flutter/apis/search_api.dart';
 import 'package:netease_cloud_music_flutter/entities/hot_result/hot.dart';
+import 'package:netease_cloud_music_flutter/views/home/widgets/playlist_widget.dart';
 
 import 'views/home/widgets/banner_widget.dart';
 
@@ -72,7 +73,7 @@ class HomePage extends StatelessWidget {
         appBar: AppBar(title: Obx(() => Text("Clicks: ${vm.count}"))),
 
         // Replace the 8 lines Navigator.push by a simple Get.to(). You don't need context
-        body: const Column(children: [BannerWidget()]),
+        body: const Column(children: [BannerWidget(), PlaylistWidget()]),
         floatingActionButton: FloatingActionButton(
             onPressed: vm.getHot, child: const Icon(Icons.add)));
   }

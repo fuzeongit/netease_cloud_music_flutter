@@ -27,7 +27,7 @@ class BannerWidget extends StatelessWidget {
               ));
           Widget widget = _buildSkeleton();
           return FutureBuilder(
-              future: vm.get(),
+              future: vm.bannerApi.getJson(),
               builder:
                   (BuildContext context, AsyncSnapshot<BannerResult> snapshot) {
                 if (snapshot.hasData) {
@@ -61,8 +61,6 @@ class BannerWidget extends StatelessWidget {
   }
 
   Widget _buildMain(List<result.Banner> banners) {
-    // return Column(children: banners.map((e) => Text(e.imageUrl!)).toList());
-
     return AspectRatio(
         aspectRatio: 2.5,
         child: Swiper(
@@ -74,9 +72,7 @@ class BannerWidget extends StatelessWidget {
                 fit: BoxFit.cover,
                 progressIndicatorBuilder: (BuildContext context, String url,
                     DownloadProgress progress) {
-                  return const Center(
-                    child: CircularProgressIndicator(),
-                  );
+                  return const Skeleton();
                 },
               ),
             );
@@ -90,8 +86,4 @@ class BannerWidget extends StatelessWidget {
 
 class BannerWidgetVM extends GetxController {
   final bannerApi = Get.find<BannerApi>();
-
-  Future<BannerResult> get() {
-    return bannerApi.getJson();
-  }
 }
