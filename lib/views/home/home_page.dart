@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:netease_cloud_music_flutter/views/home/widgets/banner_widget.dart';
 import 'package:netease_cloud_music_flutter/views/home/widgets/drawer_widget.dart';
 import 'package:netease_cloud_music_flutter/views/home/widgets/playlist_widget.dart';
+import 'package:netease_cloud_music_flutter/views/home/widgets/toplist_widget.dart';
 
 class HomeVM extends GetxController {
   var count = 0.obs;
@@ -54,11 +55,15 @@ class HomePage extends StatelessWidget {
         ),
         // drawer: const DrawerWidget(),
         // Replace the 8 lines Navigator.push by a simple Get.to(). You don't need context
-        body: const Column(children: [
+        body:  ListView(children: [
           BannerWidget(),
           Padding(
             padding: EdgeInsets.symmetric(horizontal: 8, vertical: 24),
             child: PlaylistWidget(),
+          ),
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: 8, vertical: 24),
+            child: ToplistWidget(),
           ),
         ]),
         floatingActionButton: FloatingActionButton(
