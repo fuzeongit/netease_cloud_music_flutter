@@ -11,7 +11,7 @@ import 'package:netease_cloud_music_flutter/widgets/skeleton.widget.dart';
 class ToplistWidget extends StatelessWidget {
   const ToplistWidget({Key? key}) : super(key: key);
 
-  final height = 260.0;
+  final height = 320.0;
 
   @override
   Widget build(BuildContext context) {

@@ -106,7 +106,8 @@ class ToplistItem {
     return 'List(subscribers: $subscribers, subscribed: $subscribed, creator: $creator, artists: $artists, tracks: $tracks, updateFrequency: $updateFrequency, backgroundCoverId: $backgroundCoverId, backgroundCoverUrl: $backgroundCoverUrl, titleImage: $titleImage, coverText: $coverText, titleImageUrl: $titleImageUrl, coverImageUrl: $coverImageUrl, iconImageUrl: $iconImageUrl, englishTitle: $englishTitle, opRecommend: $opRecommend, recommendInfo: $recommendInfo, socialPlaylistCover: $socialPlaylistCover, tsSongCount: $tsSongCount, subscribedCount: $subscribedCount, cloudTrackCount: $cloudTrackCount, trackNumberUpdateTime: $trackNumberUpdateTime, adType: $adType, highQuality: $highQuality, specialType: $specialType, updateTime: $updateTime, newImported: $newImported, anonimous: $anonimous, coverImgId: $coverImgId, trackCount: $trackCount, coverImgUrl: $coverImgUrl, trackUpdateTime: $trackUpdateTime, totalDuration: $totalDuration, commentThreadId: $commentThreadId, privacy: $privacy, playCount: $playCount, createTime: $createTime, ordered: $ordered, description: $description, status: $status, tags: $tags, userId: $userId, name: $name, id: $id, coverImgIdStr: $coverImgIdStr, toplistType: $toplistType)';
   }
 
-  factory ToplistItem.fromJson(Map<String, dynamic> json) => _$ToplistItemFromJson(json);
+  factory ToplistItem.fromJson(Map<String, dynamic> json) =>
+      _$ToplistItemFromJson(json);
 
   Map<String, dynamic> toJson() => _$ToplistItemToJson(this);
 

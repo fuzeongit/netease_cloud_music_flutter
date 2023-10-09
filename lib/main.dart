@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:netease_cloud_music_flutter/apis/home_api.dart';
+import 'package:netease_cloud_music_flutter/apis/playlist_api.dart';
 import 'package:netease_cloud_music_flutter/apis/search_api.dart';
 import 'package:netease_cloud_music_flutter/apis/top_api.dart';
 import 'package:netease_cloud_music_flutter/app.dart';
@@ -26,9 +27,10 @@ Future<void> initServices() async {
   print('starting services ...');
   Get.put(HttpClient(AppConfig.API_HOST, options: HttpClientOptions()),
       tag: GetConfig.NETEASE_HTTP);
-  Get.put(SearchApi());
   Get.put(HomeApi());
+  Get.put(SearchApi());
   Get.put(TopApi());
+  Get.put(PlaylistApi());
 
   print('All services started...');
 }

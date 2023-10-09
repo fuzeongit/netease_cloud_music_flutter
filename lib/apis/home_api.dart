@@ -19,7 +19,7 @@ class HomeApi extends GetxService {
         jsonDecode(await rootBundle.loadString("banner.json"));
     return BannerResult.fromJson(map);
   }
-  
+
   Future<ToplistResult> toplist() async {
     return await _httpClient.get("/toplist", ToplistResult.fromJson);
   }
