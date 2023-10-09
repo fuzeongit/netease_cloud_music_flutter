@@ -3,7 +3,7 @@ import 'dart:io';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:netease_cloud_music_flutter/apis/banner_api.dart';
+import 'package:netease_cloud_music_flutter/apis/home_api.dart';
 import 'package:netease_cloud_music_flutter/entities/banner_result/banner.dart'
     as result;
 import 'package:netease_cloud_music_flutter/entities/banner_result/banner_result.dart';
@@ -27,7 +27,7 @@ class BannerWidget extends StatelessWidget {
               ));
           Widget widget = _buildSkeleton();
           return FutureBuilder(
-              future: vm.bannerApi.getJson(),
+              future: vm.homeApi.bannerJson(),
               builder:
                   (BuildContext context, AsyncSnapshot<BannerResult> snapshot) {
                 if (snapshot.hasData) {
@@ -85,5 +85,5 @@ class BannerWidget extends StatelessWidget {
 }
 
 class BannerWidgetVM extends GetxController {
-  final bannerApi = Get.find<BannerApi>();
+  final homeApi = Get.find<HomeApi>();
 }
