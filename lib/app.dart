@@ -1,11 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:netease_cloud_music_flutter/apis/search_api.dart';
-import 'package:netease_cloud_music_flutter/entities/hot_result/hot.dart';
-import 'package:netease_cloud_music_flutter/views/home/widgets/playlist_widget.dart';
-
-import 'views/home/widgets/banner_widget.dart';
-
+import 'package:netease_cloud_music_flutter/views/home/home_page.dart';
 class App extends StatelessWidget {
   const App({super.key});
 
@@ -38,48 +33,3 @@ class App extends StatelessWidget {
   }
 }
 
-class HomeVM extends GetxController {
-  var count = 0.obs;
-  increment() => count++;
-
-  final searchApi = Get.find<SearchApi>();
-
-  final hot = RxList<Hot>.empty();
-
-  getHot() async {
-    var hotResult = await searchApi.hot();
-
-    hot.value = hotResult.result.hots;
-  }
-}
-
-class HomePage extends StatelessWidget {
-  const HomePage({Key? key, required this.title}) : super(key: key);
-
-  final String title;
-
-  @override
-  Widget build(context) {
-    return GetBuilder(
-      init: HomeVM(),
-      global: false,
-      builder: _buildPage,
-    );
-  }
-
-  Widget _buildPage(HomeVM vm) {
-    return Scaffold(
-        // Use Obx(()=> to update Text() whenever count is changed.
-        appBar: AppBar(title: Obx(() => Text("Clicks: ${vm.count}"))),
-
-        // Replace the 8 lines Navigator.push by a simple Get.to(). You don't need context
-        body: const Column(children: [BannerWidget(), PlaylistWidget()]),
-        floatingActionButton: FloatingActionButton(
-            onPressed: vm.getHot, child: const Icon(Icons.add)));
-  }
-
-  Widget _buildHotsView(HomeVM vm) {
-    return Obx(() => ListView(
-        children: vm.hot.map((element) => Text(element.first)).toList()));
-  }
-}

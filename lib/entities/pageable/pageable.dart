@@ -7,14 +7,11 @@ part 'pageable.g.dart';
 class Pageable {
   final int? offset;
   final int? limit;
-  final String? order;
 
-  const Pageable({this.offset, this.limit, this.order});
+  const Pageable({this.offset, this.limit});
 
   @override
-  String toString() {
-    return 'Pageable(offset: $offset, limit: $limit, order: $order)';
-  }
+  String toString() => 'Pageable(offset: $offset, limit: $limit)';
 
   factory Pageable.fromJson(Map<String, dynamic> json) {
     return _$PageableFromJson(json);
@@ -25,12 +22,10 @@ class Pageable {
   Pageable copyWith({
     int? offset,
     int? limit,
-    String? order,
   }) {
     return Pageable(
       offset: offset ?? this.offset,
       limit: limit ?? this.limit,
-      order: order ?? this.order,
     );
   }
 
@@ -43,5 +38,5 @@ class Pageable {
   }
 
   @override
-  int get hashCode => offset.hashCode ^ limit.hashCode ^ order.hashCode;
+  int get hashCode => offset.hashCode ^ limit.hashCode;
 }

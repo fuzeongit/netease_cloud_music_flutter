@@ -29,5 +29,6 @@ Future<void> initServices() async {
   Get.put(SearchApi());
   Get.put(BannerApi());
   Get.put(TopApi());
+
   print('All services started...');
 }
