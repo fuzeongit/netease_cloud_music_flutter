@@ -1,13 +1,13 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'toplist_detail_result.dart';
+part of 'playlist_detail_result.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-ToplistDetailResult _$ToplistDetailResultFromJson(Map<String, dynamic> json) =>
-    ToplistDetailResult(
+PlaylistDetailResult _$ToplistDetailResultFromJson(Map<String, dynamic> json) =>
+    PlaylistDetailResult(
       code: json['code'] as int?,
       relatedVideos: json['relatedVideos'],
       playlist: json['playlist'] == null
@@ -25,7 +25,7 @@ ToplistDetailResult _$ToplistDetailResultFromJson(Map<String, dynamic> json) =>
     );
 
 Map<String, dynamic> _$ToplistDetailResultToJson(
-        ToplistDetailResult instance) =>
+        PlaylistDetailResult instance) =>
     <String, dynamic>{
       'code': instance.code,
       'relatedVideos': instance.relatedVideos,

@@ -57,7 +57,7 @@ class HomePage extends StatelessWidget {
         ),
         // drawer: const DrawerWidget(),
         // Replace the 8 lines Navigator.push by a simple Get.to(). You don't need context
-        body: ListView(children: [
+        body: ListView(children: const [
           BannerWidget(),
           Padding(
             padding: EdgeInsets.symmetric(horizontal: 8, vertical: 24),
@@ -67,7 +67,7 @@ class HomePage extends StatelessWidget {
             padding: EdgeInsets.symmetric(horizontal: 8, vertical: 24),
             child: ToplistWidget(),
           ),
-           Padding(
+          Padding(
             padding: EdgeInsets.symmetric(horizontal: 8, vertical: 24),
             child: DjHotWidget(),
           ),

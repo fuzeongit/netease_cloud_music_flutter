@@ -4,10 +4,10 @@ import 'package:json_annotation/json_annotation.dart';
 import 'playlist.dart';
 import 'privilege.dart';
 
-part 'toplist_detail_result.g.dart';
+part 'playlist_detail_result.g.dart';
 
 @JsonSerializable()
-class ToplistDetailResult {
+class PlaylistDetailResult {
   final int? code;
   final dynamic relatedVideos;
   final Playlist? playlist;
@@ -19,7 +19,7 @@ class ToplistDetailResult {
   final int? fromUserCount;
   final dynamic songFromUsers;
 
-  const ToplistDetailResult({
+  const PlaylistDetailResult({
     this.code,
     this.relatedVideos,
     this.playlist,
@@ -34,16 +34,16 @@ class ToplistDetailResult {
 
   @override
   String toString() {
-    return 'ToplistDetailResult(code: $code, relatedVideos: $relatedVideos, playlist: $playlist, urls: $urls, privileges: $privileges, sharedPrivilege: $sharedPrivilege, resEntrance: $resEntrance, fromUsers: $fromUsers, fromUserCount: $fromUserCount, songFromUsers: $songFromUsers)';
+    return 'PlaylistDetailResult(code: $code, relatedVideos: $relatedVideos, playlist: $playlist, urls: $urls, privileges: $privileges, sharedPrivilege: $sharedPrivilege, resEntrance: $resEntrance, fromUsers: $fromUsers, fromUserCount: $fromUserCount, songFromUsers: $songFromUsers)';
   }
 
-  factory ToplistDetailResult.fromJson(Map<String, dynamic> json) {
+  factory PlaylistDetailResult.fromJson(Map<String, dynamic> json) {
     return _$ToplistDetailResultFromJson(json);
   }
 
   Map<String, dynamic> toJson() => _$ToplistDetailResultToJson(this);
 
-  ToplistDetailResult copyWith({
+  PlaylistDetailResult copyWith({
     int? code,
     dynamic relatedVideos,
     Playlist? playlist,
@@ -55,7 +55,7 @@ class ToplistDetailResult {
     int? fromUserCount,
     dynamic songFromUsers,
   }) {
-    return ToplistDetailResult(
+    return PlaylistDetailResult(
       code: code ?? this.code,
       relatedVideos: relatedVideos ?? this.relatedVideos,
       playlist: playlist ?? this.playlist,
@@ -72,7 +72,7 @@ class ToplistDetailResult {
   @override
   bool operator ==(Object other) {
     if (identical(other, this)) return true;
-    if (other is! ToplistDetailResult) return false;
+    if (other is! PlaylistDetailResult) return false;
     final mapEquals = const DeepCollectionEquality().equals;
     return mapEquals(other.toJson(), toJson());
   }

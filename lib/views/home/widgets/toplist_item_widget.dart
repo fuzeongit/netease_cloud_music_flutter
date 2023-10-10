@@ -49,7 +49,7 @@ class ToplistItemWidget extends StatelessWidget {
                             style: const TextStyle(fontSize: 12))),
                   ),
                   FutureBuilder(
-                      future: vm.playlistApi.detailJson(),
+                      future: vm.playlistApi.detailJson(toplistItem.id!),
                       builder: (BuildContext context, snapshot) {
                         if (snapshot.hasData) {
                           final result = snapshot.data!;

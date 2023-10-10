@@ -82,6 +82,7 @@ class DjHotWidget extends StatelessWidget {
                         AspectRatio(
                             aspectRatio: 1,
                             child: Card(
+                              surfaceTintColor: Colors.white,
                               clipBehavior: Clip.antiAliasWithSaveLayer,
                               child: Skeleton(),
                             )),

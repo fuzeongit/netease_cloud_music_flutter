@@ -66,6 +66,7 @@ class ToplistWidget extends StatelessWidget {
             children: List.generate(
               3,
               (index) => const Card(
+                surfaceTintColor: Colors.white,
                 clipBehavior: Clip.antiAliasWithSaveLayer,
                 child: Skeleton(),
               ),

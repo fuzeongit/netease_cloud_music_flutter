@@ -50,6 +50,7 @@ class BannerWidget extends StatelessWidget {
         child: Swiper(
           itemBuilder: (context, index) {
             return const Card(
+              surfaceTintColor: Colors.white,
               clipBehavior: Clip.antiAliasWithSaveLayer,
               child: Skeleton(),
             );
@@ -66,6 +67,7 @@ class BannerWidget extends StatelessWidget {
         child: Swiper(
           itemBuilder: (context, index) {
             return Card(
+              surfaceTintColor: Colors.white,
               clipBehavior: Clip.antiAliasWithSaveLayer,
               child: CachedNetworkImage(
                 imageUrl: banners[index].imageUrl!,

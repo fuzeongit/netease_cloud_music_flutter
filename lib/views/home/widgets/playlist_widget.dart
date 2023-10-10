@@ -9,6 +9,7 @@ import 'package:netease_cloud_music_flutter/apis/top_api.dart';
 import 'package:netease_cloud_music_flutter/entities/pageable/pageable.dart';
 import 'package:netease_cloud_music_flutter/entities/playlist_result/playlist.dart';
 import 'package:netease_cloud_music_flutter/utils/writing.dart';
+import 'package:netease_cloud_music_flutter/views/playlist/playlist_page.dart';
 import 'package:netease_cloud_music_flutter/widgets/link.widget.dart';
 import 'package:netease_cloud_music_flutter/widgets/skeleton.widget.dart';
 
@@ -34,7 +35,7 @@ class PlaylistWidget extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.only(bottom: 8.0),
                 child: LinkWidget(
-                  onTap: vm.toSquare,
+                  onTap: () {},
                   child: const Text(
                     '推荐歌单',
                     style: TextStyle(fontSize: 16),
@@ -47,7 +48,7 @@ class PlaylistWidget extends StatelessWidget {
                     if (snapshot.hasData) {
                       final result = snapshot.data!;
                       if (result.code == HttpStatus.ok) {
-                        widget = _buildMain(result.playlists!);
+                        widget = _buildMain(vm, result.playlists!);
                       } else {
                         widget = skeleton;
                       }
@@ -91,7 +92,7 @@ class PlaylistWidget extends StatelessWidget {
     );
   }
 
-  Widget _buildMain(List<Playlist> playlists) {
+  Widget _buildMain(PlaylistWidgetVM vm, List<Playlist> playlists) {
     return SizedBox(
       width: double.infinity,
       height: 320,
@@ -102,71 +103,76 @@ class PlaylistWidget extends StatelessWidget {
           mainAxisSpacing: 8,
           crossAxisCount: 2,
           childAspectRatio: 1.4,
-          children: playlists.map((item) => _buildItem(item)).toList()),
+          children: playlists.map((item) => _buildItem(vm, item)).toList()),
     );
   }
 
-  Widget _buildItem(Playlist playlist) {
-    return Column(
-      children: [
-        AspectRatio(
-          aspectRatio: 1,
-          child: ClipRRect(
-            borderRadius: BorderRadius.circular(8),
-            child: Stack(
-              children: [
-                Positioned.fill(
-                  child: CachedNetworkImage(
-                    imageUrl: playlist.coverImgUrl!,
-                    fit: BoxFit.cover,
-                    progressIndicatorBuilder: (BuildContext context, String url,
-                        DownloadProgress progress) {
-                      return const Skeleton();
-                    },
-                  ),
-                ),
-                Positioned(
-                  bottom: 0,
-                  left: 30,
-                  right: 0,
-                  child: ClipRRect(
-                    borderRadius:
-                        const BorderRadius.only(topLeft: Radius.circular(12)),
-                    child: Container(
-                      padding: const EdgeInsets.symmetric(
-                          vertical: 1, horizontal: 8),
-                      decoration: const BoxDecoration(
-                        color: Colors.black38,
-                      ),
-                      child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            const Iconify(Ion.play,
-                                size: 12, color: Colors.white),
-                            Padding(
-                              padding: const EdgeInsets.only(left: 4),
-                              child: Text(
-                                tenThousand(playlist.playCount!),
-                                textScaleFactor: .9,
-                                style: const TextStyle(color: Colors.white),
-                              ),
-                            )
-                          ]),
+  Widget _buildItem(PlaylistWidgetVM vm, Playlist playlist) {
+    return GestureDetector(
+      onTap: () {
+        vm.toSquare(playlist.id!);
+      },
+      child: Column(
+        children: [
+          AspectRatio(
+            aspectRatio: 1,
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(8),
+              child: Stack(
+                children: [
+                  Positioned.fill(
+                    child: CachedNetworkImage(
+                      imageUrl: playlist.coverImgUrl!,
+                      fit: BoxFit.cover,
+                      progressIndicatorBuilder: (BuildContext context,
+                          String url, DownloadProgress progress) {
+                        return const Skeleton();
+                      },
                     ),
                   ),
-                ),
-              ],
+                  Positioned(
+                    bottom: 0,
+                    left: 30,
+                    right: 0,
+                    child: ClipRRect(
+                      borderRadius:
+                          const BorderRadius.only(topLeft: Radius.circular(12)),
+                      child: Container(
+                        padding: const EdgeInsets.symmetric(
+                            vertical: 1, horizontal: 8),
+                        decoration: const BoxDecoration(
+                          color: Colors.black38,
+                        ),
+                        child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              const Iconify(Ion.play,
+                                  size: 12, color: Colors.white),
+                              Padding(
+                                padding: const EdgeInsets.only(left: 4),
+                                child: Text(
+                                  tenThousand(playlist.playCount!),
+                                  textScaleFactor: .9,
+                                  style: const TextStyle(color: Colors.white),
+                                ),
+                              )
+                            ]),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
             ),
           ),
-        ),
-        const Spacer(flex: 8),
-        Text(
-          playlist.name!,
-          overflow: TextOverflow.ellipsis,
-          maxLines: 2,
-          style: const TextStyle(fontSize: 12),
-        )
-      ],
+          const Spacer(flex: 8),
+          Text(
+            playlist.name!,
+            overflow: TextOverflow.ellipsis,
+            maxLines: 2,
+            style: const TextStyle(fontSize: 12),
+          )
+        ],
+      ),
     );
   }
 }
@@ -176,5 +182,7 @@ class PlaylistWidgetVM extends GetxController {
 
   final pageable = Rx(const Pageable(limit: 12));
 
-  void toSquare() {}
+  void toSquare(int id) {
+    Get.to(() => PlaylistPage(id));
+  }
 }
