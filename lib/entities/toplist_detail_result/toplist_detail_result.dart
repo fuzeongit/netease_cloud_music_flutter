@@ -6,7 +6,6 @@ import 'privilege.dart';
 
 part 'toplist_detail_result.g.dart';
 
-
 @JsonSerializable()
 class ToplistDetailResult {
   final int? code;

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_zoom_drawer/flutter_zoom_drawer.dart';
 import 'package:get/get.dart';
 import 'package:netease_cloud_music_flutter/views/home/widgets/banner_widget.dart';
+import 'package:netease_cloud_music_flutter/views/home/widgets/dj_hot_widget.dart';
 import 'package:netease_cloud_music_flutter/views/home/widgets/drawer_widget.dart';
 import 'package:netease_cloud_music_flutter/views/home/widgets/playlist_widget.dart';
 import 'package:netease_cloud_music_flutter/views/home/widgets/toplist_widget.dart';
@@ -36,6 +37,7 @@ class HomePage extends StatelessWidget {
         menuScreen: DrawerWidget(color: Colors.grey.shade100),
         menuBackgroundColor: Colors.grey.shade100,
         mainScreen: _buildPage(vm),
+        showShadow: true,
         angle: 0,
         mainScreenTapClose: true,
         slideWidth: Get.mediaQuery.size.width * 0.85,
@@ -64,6 +66,10 @@ class HomePage extends StatelessWidget {
           Padding(
             padding: EdgeInsets.symmetric(horizontal: 8, vertical: 24),
             child: ToplistWidget(),
+          ),
+           Padding(
+            padding: EdgeInsets.symmetric(horizontal: 8, vertical: 24),
+            child: DjHotWidget(),
           ),
         ]),
         floatingActionButton: FloatingActionButton(

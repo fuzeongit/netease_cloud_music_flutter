@@ -16,21 +16,19 @@ class ToplistItemWidget extends StatelessWidget {
 
   final ToplistItem toplistItem;
 
+  final imageSize = 60.0;
+
   @override
   Widget build(BuildContext context) {
     return GetBuilder<ToplistItemWidgetVM>(
         init: ToplistItemWidgetVM(toplistItem),
         global: false,
         builder: (vm) {
-          var skeleton = const AspectRatio(
-              aspectRatio: 2.5,
-              child: Padding(
-                padding: EdgeInsets.all(8.0),
-                child: Skeleton(),
-              ));
-          Widget widget = _buildSkeleton();
+          var skeleton = _buildSkeleton();
+          var widget = skeleton;
           return Card(
-            color: Colors.white,
+            surfaceTintColor: Colors.white,
+            elevation: 1,
             child: Padding(
               padding:
                   const EdgeInsets.symmetric(horizontal: 16.0, vertical: 12),
@@ -46,11 +44,9 @@ class ToplistItemWidget extends StatelessWidget {
                               toplistItem.name!,
                               overflow: TextOverflow.ellipsis,
                             )),
-                        subtitle: Text(
-                          toplistItem.description!,
-                          overflow: TextOverflow.ellipsis,
-                          style:const TextStyle(fontSize: 12)
-                        )),
+                        subtitle: Text(toplistItem.description!,
+                            overflow: TextOverflow.ellipsis,
+                            style: const TextStyle(fontSize: 12))),
                   ),
                   FutureBuilder(
                       future: vm.playlistApi.detailJson(),
@@ -64,7 +60,13 @@ class ToplistItemWidget extends StatelessWidget {
                             widget = skeleton;
                           }
                         }
-                        return widget;
+                        return Expanded(
+                          flex: 1,
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: widget,
+                          ),
+                        );
                       }),
                 ],
               ),
@@ -73,13 +75,47 @@ class ToplistItemWidget extends StatelessWidget {
         });
   }
 
-  Widget _buildSkeleton() {
-    return Skeleton();
+  List<Widget> _buildSkeleton() {
+    return List.generate(
+        3,
+        (index) => SizedBox(
+            height: imageSize,
+            child: Row(children: [
+              SizedBox(
+                  width: imageSize,
+                  height: imageSize,
+                  child: ClipRRect(
+                      borderRadius: BorderRadius.circular(8),
+                      child: const Skeleton())),
+              const Expanded(
+                flex: 1,
+                child: Padding(
+                  padding:
+                      EdgeInsets.symmetric(vertical: 6.0, horizontal: 12.0),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      SizedBox(
+                          height: 16,
+                          width: double.infinity,
+                          child: Skeleton()),
+                      SizedBox(
+                        height: 12,
+                        child: FractionallySizedBox(
+                          widthFactor: 0.5,
+                          child: Skeleton(),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              )
+            ])));
   }
 
-  Widget _buildMain(Playlist playlist) {
-    var imageSize = 60.0;
-    var children = playlist.tracks!
+  List<Widget> _buildMain(Playlist playlist) {
+    return playlist.tracks!
         .take(3)
         .map((e) => SizedBox(
               height: imageSize,
@@ -128,13 +164,6 @@ class ToplistItemWidget extends StatelessWidget {
               ),
             ))
         .toList();
-    return Expanded(
-      flex: 1,
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: children,
-      ),
-    );
   }
 }
 

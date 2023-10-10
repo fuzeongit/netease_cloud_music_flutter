@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
+import 'package:netease_cloud_music_flutter/apis/dj_api.dart';
 import 'package:netease_cloud_music_flutter/apis/home_api.dart';
 import 'package:netease_cloud_music_flutter/apis/playlist_api.dart';
 import 'package:netease_cloud_music_flutter/apis/search_api.dart';
@@ -31,6 +32,7 @@ Future<void> initServices() async {
   Get.put(SearchApi());
   Get.put(TopApi());
   Get.put(PlaylistApi());
+  Get.put(DjApi());
 
   print('All services started...');
 }

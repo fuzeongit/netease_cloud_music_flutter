@@ -19,12 +19,6 @@ class ToplistWidget extends StatelessWidget {
         init: ToplistWidgetVM(),
         global: false,
         builder: (vm) {
-          var skeleton = const AspectRatio(
-              aspectRatio: 2.5,
-              child: Padding(
-                padding: EdgeInsets.all(8.0),
-                child: Skeleton(),
-              ));
           Widget widget = _buildSkeleton();
           return Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -48,7 +42,7 @@ class ToplistWidget extends StatelessWidget {
                       if (result.code == HttpStatus.ok) {
                         widget = _buildMain(result.list!);
                       } else {
-                        widget = skeleton;
+                        widget = _buildSkeleton();
                       }
                     }
                     return widget;
@@ -72,7 +66,6 @@ class ToplistWidget extends StatelessWidget {
             children: List.generate(
               3,
               (index) => const Card(
-                color: Colors.white,
                 clipBehavior: Clip.antiAliasWithSaveLayer,
                 child: Skeleton(),
               ),
