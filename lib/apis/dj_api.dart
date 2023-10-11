@@ -8,7 +8,7 @@ import 'package:netease_cloud_music_flutter/entities/pageable/pageable.dart';
 import 'package:netease_cloud_music_flutter/share/http/services.dart';
 
 class DjApi extends GetxService {
-  final _httpClient = Get.find<HttpClient>(tag: GetConfig.NETEASE_HTTP);
+  final _httpClient = Get.find<HttpClient>(tag: GetConfig.neteaseHttp);
 
   Future<DjHotResult> hot(Pageable pageable) async {
     var params = pageable.toJson();

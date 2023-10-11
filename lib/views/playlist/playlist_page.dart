@@ -5,6 +5,7 @@ import 'package:iconify_flutter/iconify_flutter.dart';
 import 'package:iconify_flutter/icons/ion.dart';
 import 'package:netease_cloud_music_flutter/apis/playlist_api.dart';
 import 'package:netease_cloud_music_flutter/entities/toplist_detail_result/playlist_detail_result.dart';
+import 'package:netease_cloud_music_flutter/entities/toplist_detail_result/track.dart';
 import 'package:netease_cloud_music_flutter/utils/writing.dart';
 import 'package:netease_cloud_music_flutter/widgets/shadow_icon.widget.dart';
 import 'package:netease_cloud_music_flutter/widgets/skeleton.widget.dart';
@@ -50,10 +51,10 @@ class PlaylistPage extends StatelessWidget {
                   Get.back();
                 },
               ),
-              elevation: 1,
               pinned: true,
               //默认高度是状态栏和导航栏的高度，如果有滚动视差的话，要大于前两者的高度
               floating: false,
+              excludeHeaderSemantics: false,
               expandedHeight: Get.width,
               //只跟floating相对应，如果为true，floating必须为true，也就是向下滑动一点儿，整个大背景就会动画显示全部，网上滑动整个导航栏的内容就会消失
               flexibleSpace: FlexibleSpaceBar(
@@ -65,10 +66,9 @@ class PlaylistPage extends StatelessWidget {
             ),
             SliverList(
               delegate: SliverChildListDelegate([
-                Container(
-                  height: Get.height - Get.width,
-                  color: Colors.pink,
-                )
+                Obx(() => vm.playlistResult.value != null
+                    ? _buildMain(vm)
+                    : Container())
               ]),
             ),
           ])),
@@ -81,9 +81,14 @@ class PlaylistPage extends StatelessWidget {
 
   Widget _buildBar(PlaylistVM vm) {
     var playlist = vm.playlistResult.value!.playlist!;
-
+    var headerHeight = 56.0;
+    var padding = 16.0;
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 16.0),
+      padding: EdgeInsets.only(
+          top: headerHeight + padding,
+          right: padding,
+          left: padding,
+          bottom: padding),
       child: Column(
         children: [
           Row(
@@ -149,6 +154,49 @@ class PlaylistPage extends StatelessWidget {
             ],
           ),
           Text(playlist.description!, overflow: TextOverflow.ellipsis)
+        ],
+      ),
+    );
+  }
+
+  Widget _buildMain(PlaylistVM vm) {
+    var tracks = vm.playlistResult.value!.playlist!.tracks!;
+
+    return Column(
+      children:
+          tracks.asMap().keys.map((i) => _buildRow(vm, i, tracks)).toList(),
+    );
+  }
+
+  Padding _buildRow(PlaylistVM vm, int i, List<Track> tracks) {
+    var track = tracks[i];
+    return Padding(
+      padding: const EdgeInsets.all(16.0),
+      child: Row(
+        children: [
+          Text((i + 1).toString()),
+          Expanded(
+            flex: 1,
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    track.name!,
+                    overflow: TextOverflow.ellipsis,
+                    style: const TextStyle(fontSize: 16),
+                  ),
+                  Text(
+                    track.ar!.map((e) => e.name!).toList().join("/"),
+                    overflow: TextOverflow.ellipsis,
+                    style: TextStyle(fontSize: 12, color: Colors.grey.shade500),
+                  )
+                ],
+              ),
+            ),
+          )
         ],
       ),
     );

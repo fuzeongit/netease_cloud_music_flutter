@@ -12,7 +12,7 @@ class DrawerWidget extends GetView<ZoomDrawerController> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: color,
-      body: Text("123"),
+      body: const Text("123"),
     );
   }
 }

@@ -7,7 +7,7 @@ import 'package:netease_cloud_music_flutter/entities/toplist_detail_result/playl
 import 'package:netease_cloud_music_flutter/share/http/services.dart';
 
 class PlaylistApi extends GetxService {
-  final _httpClient = Get.find<HttpClient>(tag: GetConfig.NETEASE_HTTP);
+  final _httpClient = Get.find<HttpClient>(tag: GetConfig.neteaseHttp);
 
   Future<PlaylistDetailResult> detail(int id) async {
     return await _httpClient.get(

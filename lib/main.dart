@@ -25,14 +25,14 @@ main() async {
 }
 
 Future<void> initServices() async {
-  print('starting services ...');
-  Get.put(HttpClient(AppConfig.API_HOST, options: HttpClientOptions()),
-      tag: GetConfig.NETEASE_HTTP);
+  debugPrint('starting services ...');
+  Get.put(HttpClient(AppConfig.apiHost, options: HttpClientOptions()),
+      tag: GetConfig.neteaseHttp);
   Get.put(HomeApi());
   Get.put(SearchApi());
   Get.put(TopApi());
   Get.put(PlaylistApi());
   Get.put(DjApi());
 
-  print('All services started...');
+  debugPrint('All services started...');
 }

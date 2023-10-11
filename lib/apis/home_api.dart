@@ -8,7 +8,7 @@ import 'package:netease_cloud_music_flutter/entities/toplist_result/toplist_resu
 import 'package:netease_cloud_music_flutter/share/http/services.dart';
 
 class HomeApi extends GetxService {
-  final _httpClient = Get.find<HttpClient>(tag: GetConfig.NETEASE_HTTP);
+  final _httpClient = Get.find<HttpClient>(tag: GetConfig.neteaseHttp);
 
   Future<BannerResult> banner() async {
     return await _httpClient.get("/banner", BannerResult.fromJson);

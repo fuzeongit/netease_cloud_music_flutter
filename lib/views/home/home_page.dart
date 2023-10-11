@@ -15,7 +15,7 @@ class HomeVM extends GetxController {
   increment() => count++;
 
   void toggleDrawer() {
-    print("Toggle drawer");
+    debugPrint("Toggle drawer");
     zoomDrawerController.toggle?.call();
     update();
   }
@@ -90,7 +90,7 @@ class HomeDrawerController extends GetxController {
   final zoomDrawerController = ZoomDrawerController();
 
   void toggleDrawer() {
-    print("Toggle drawer");
+    debugPrint("Toggle drawer");
     zoomDrawerController.toggle?.call();
     update();
   }

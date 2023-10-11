@@ -8,7 +8,7 @@ import 'package:netease_cloud_music_flutter/entities/playlist_result/playlist_re
 import 'package:netease_cloud_music_flutter/share/http/services.dart';
 
 class TopApi extends GetxService {
-  final _httpClient = Get.find<HttpClient>(tag: GetConfig.NETEASE_HTTP);
+  final _httpClient = Get.find<HttpClient>(tag: GetConfig.neteaseHttp);
 
   Future<PlaylistResult> playlist(Pageable pageable) async {
     var params = pageable.toJson();

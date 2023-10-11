@@ -1,3 +1,3 @@
 class AppConfig {
-  static const String API_HOST = "https://api.trtst.com";
+  static const String apiHost = "https://api.trtst.com";
 }

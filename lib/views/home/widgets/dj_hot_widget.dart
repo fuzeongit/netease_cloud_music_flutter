@@ -6,10 +6,8 @@ import 'package:get/get.dart';
 import 'package:iconify_flutter/iconify_flutter.dart';
 import 'package:iconify_flutter/icons/ion.dart';
 import 'package:netease_cloud_music_flutter/apis/dj_api.dart';
-import 'package:netease_cloud_music_flutter/apis/top_api.dart';
 import 'package:netease_cloud_music_flutter/entities/dj_hot_result/dj_radio.dart';
 import 'package:netease_cloud_music_flutter/entities/pageable/pageable.dart';
-import 'package:netease_cloud_music_flutter/entities/playlist_result/playlist.dart';
 import 'package:netease_cloud_music_flutter/utils/writing.dart';
 import 'package:netease_cloud_music_flutter/widgets/link.widget.dart';
 import 'package:netease_cloud_music_flutter/widgets/skeleton.widget.dart';
@@ -49,7 +47,7 @@ class DjHotWidget extends StatelessWidget {
                     if (snapshot.hasData) {
                       final result = snapshot.data!;
                       if (result.code == HttpStatus.ok) {
-                        widget = _buildMain(result.djRadios!);
+                        widget = _buildMain(result.djRadios);
                       } else {
                         widget = skeleton;
                       }
